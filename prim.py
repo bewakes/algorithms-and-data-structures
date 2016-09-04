@@ -77,4 +77,6 @@ def main():
         # now graph is in adjacency matrix form
         newwts, frm = prim(graph)
         print(sum(newwts))
-main()
+
+if __name__=='__main__':
+    main()
