@@ -71,10 +71,10 @@ class BinaryTree(object):
             else:
                 self._insert_recursive(ref_node.right_child, insertnode)
 
-    def DFS_traverse(self):
-        return self._DFS_traverse(self.root)
+    def DF_traverse(self):
+        return self._DF_traverse(self.root)
 
-    def _DFS_traverse(self, root):
+    def _DF_traverse(self, root):
         """
         Recursive Depth first traversal of the root
         Returns the traversed list
@@ -86,9 +86,9 @@ class BinaryTree(object):
         elif root.is_leaf():
             return [root]
         else:
-            lst.extend(self._DFS_traverse(root.left_child))
+            lst.extend(self._DF_traverse(root.left_child))
             lst.append(root)
-            lst.extend(self._DFS_traverse(root.right_child))
+            lst.extend(self._DF_traverse(root.right_child))
             return lst
 
 if __name__=="__main__":
@@ -100,4 +100,4 @@ if __name__=="__main__":
 
     [bintree.insert(x) for x in lst]
 
-    print([x.value for x in bintree.DFS_traverse()])
+    print([x.value for x in bintree.DF_traverse()])
