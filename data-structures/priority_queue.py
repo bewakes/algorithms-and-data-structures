@@ -38,6 +38,9 @@ class NaivePriorityQueue:
         return mx
 
     def getMax(self):
+        """
+        Returns element of highest priority
+        """
         return max(self.elements)
 
 
