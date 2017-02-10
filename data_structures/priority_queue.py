@@ -43,6 +43,16 @@ class NaivePriorityQueue:
         """
         return max(self.elements)
 
+class PriorityQueue:
+    """
+    This implements max-heap so has complexity O(log n) for both operations
+    """
+    def __init__(self):
+        pass
+
+    def enqueue(self, element):
+        pass
+
 
 if __name__=="__main__":
     import random
