@@ -31,17 +31,17 @@ class DisjointSet:
         """
         i and j are 0 indexed elements which are to be unioned
         """
-        i_root = find(i)
-        j_root = find(j)
+        i_root = self.find(i)
+        j_root = self.find(j)
 
         if i_root == j_root:
             # nothing to be done already in same set
             return
 
-        if self.ranks_array[i] < self.ranks_array[j]:
-            self.parents_array[i] = j
+        if self.ranks_array[i_root] < self.ranks_array[j_root]:
+            self.parents_array[i_root] = j_root
         else:
-            self.parents_array[j] = i
-            if self.ranks_array[i] == self.ranks_array[j]:
-                self.ranks_array[i]+=1
+            self.parents_array[j_root] = self.parents_array[i_root]
+            if self.ranks_array[i_root] == self.ranks_array[j_root]:
+                self.ranks_array[i_root]+=1
 
