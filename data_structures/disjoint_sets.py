@@ -31,8 +31,8 @@ class DisjointSet:
         """
         i and j are 0 indexed elements which are to be unioned
         """
-        i_root = find(i)
-        j_root = find(j)
+        i_root = self.find(i)
+        j_root = self.find(j)
 
         if i_root == j_root:
             # nothing to be done already in same set
