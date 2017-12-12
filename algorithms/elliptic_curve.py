@@ -18,12 +18,12 @@ class Curve:
 
 
 class Point:
-    def __init__(self, curve, x, y):
+    def __init__(self, curve, x, y, infinity=False):
         self.x = x
         self.y = y
         self.curve = curve
-        self.is_infinity = False
-        if not curve.contains(self):
+        self.is_infinity = infinity
+        if not infinity and not curve.contains(self):
             raise Exception('Point ({}, {}) does not lie on curve y**2 = x**3 + {}x + {}'.format(x, y, self.curve.a, self.curve.b))
 
     def __add__(self, p1):
@@ -57,7 +57,15 @@ class Point:
         return "Point: ({}, {})".format(self.x, self.y)
 
     def __mul__(self, n):
-        pass
+        p = Point(self.curve, 0, 0, True)
+        p0 = Point(self.curve, self.x, self.y)
+        while n:
+            r = n%2
+            n = n/2
+            if r == 1:
+                p = p + p0
+            p0 = p0.double()
+        return p
 
 
 def multiply(a, b):
@@ -73,7 +81,5 @@ def multiply(a, b):
 
 if __name__ == '__main__':
     curve = Curve(a=2, b=3,p=97)
-    point = Point( curve, 3, 6 )
-    print(point)
-    print(point+point)
-    print(point+point+point)
+    point = Point( curve, 3, 91)
+    print(point*2)
