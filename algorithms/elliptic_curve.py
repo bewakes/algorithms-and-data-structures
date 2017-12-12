@@ -33,16 +33,14 @@ class Point:
 
         dx = self.x - p1.x
         dy = self.y - p1.y
-        return self._get_reflected_point_from_dy_dx(dy, dx)
-
-
-    def _get_reflected_point_from_dy_dx(self, dy, dx):
         inv_dx = extendedEuclid(dx, self.curve.p)[0]
         slope = (dy * inv_dx) % self.curve.p
 
-        x = (slope **2 - 2*self.x ) % self.curve.p
+        x = (slope **2 - self.x - p1.x ) % self.curve.p
         y =  (slope * (self.x - x) - self.y) % self.curve.p
         return Point(self.curve, x, y)
+        return self._get_reflected_point_from_dy_dx(dy, dx)
+
 
     def double(self):
         if self.is_infinity:
@@ -50,7 +48,13 @@ class Point:
         # get x and y
         dx = 2*self.y
         dy = 3*self.x**2 + self.curve.a
-        return self._get_reflected_point_from_dy_dx(dy, dx)
+
+        inv_dx = extendedEuclid(dx, self.curve.p)[0]
+        slope = (dy * inv_dx) % self.curve.p
+
+        x = (slope **2 - 2*self.x ) % self.curve.p
+        y =  (slope * (self.x - x) - self.y) % self.curve.p
+        return Point(self.curve, x, y)
 
 
     def __str__(self):
@@ -82,4 +86,5 @@ def multiply(a, b):
 if __name__ == '__main__':
     curve = Curve(a=2, b=3,p=97)
     point = Point( curve, 3, 91)
-    print(point*2)
+    for x in range(1, 6):
+        print('{} -> {}'.format(x, point * x))
