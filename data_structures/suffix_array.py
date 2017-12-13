@@ -17,6 +17,6 @@ def suffix_tree(string):
     return bintree
 
 if __name__=="__main__":
-    tree = suffix_tree("human")
+    tree = suffix_tree("banana")
     print([x.value for x in tree.DF_traverse()])
-    print(suffix_array("human"))
+    print(suffix_array("banana"))
