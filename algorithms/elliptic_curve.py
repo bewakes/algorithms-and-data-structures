@@ -60,6 +60,9 @@ class Point:
     def __str__(self):
         return "Point: ({}, {})".format(self.x, self.y)
 
+    def __rmul__(self, n):
+        return self.__mul__(n)
+
     def __mul__(self, n):
         p = Point(self.curve, 0, 0, True)
         p0 = Point(self.curve, self.x, self.y)
@@ -84,7 +87,10 @@ def multiply(a, b):
 
 
 if __name__ == '__main__':
-    curve = Curve(a=2, b=3,p=97)
-    point = Point( curve, 3, 91)
-    for x in range(1, 6):
-        print('{} -> {}'.format(x, point * x))
+    prime = 2**256 - 2**32 - 2**9 - 2**8 - 2**7 - 2**6 - 2**4 - 1
+    Gx = 55066263022277343669578718895168534326250603453777594175500187360389116729240
+    Gy = 32670510020758816978083085130507043184471273380659243275938904335757337482424
+    n = 1234
+    curve = Curve(a=0, b=7,p=prime)
+    point = Point( curve, Gx, Gy)
+    print(n*point)
